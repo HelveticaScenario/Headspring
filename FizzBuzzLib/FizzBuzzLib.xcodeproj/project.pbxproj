@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CABB592315AFD4F100579674 /* fizzbuzzlib.c in Sources */ = {isa = PBXBuildFile; fileRef = CABB592215AFD4F100579674 /* fizzbuzzlib.c */; };
+		CABB592315AFD4F100579674 /* fizzbuzzlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CABB592215AFD4F100579674 /* fizzbuzzlib.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CABB591B15AFD31D00579674 /* libFizzBuzzLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libFizzBuzzLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		CABB592215AFD4F100579674 /* fizzbuzzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fizzbuzzlib.c; sourceTree = "<group>"; };
+		CABB592215AFD4F100579674 /* fizzbuzzlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fizzbuzzlib.cpp; sourceTree = "<group>"; };
+		CABB594815AFE00C00579674 /* fizzbuzzclassic.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fizzbuzzclassic.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,7 +30,8 @@
 		CABB591015AFD31D00579674 = {
 			isa = PBXGroup;
 			children = (
-				CABB592215AFD4F100579674 /* fizzbuzzlib.c */,
+				CABB594815AFE00C00579674 /* fizzbuzzclassic.c */,
+				CABB592215AFD4F100579674 /* fizzbuzzlib.cpp */,
 				CABB591C15AFD31D00579674 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,7 +104,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CABB592315AFD4F100579674 /* fizzbuzzlib.c in Sources */,
+				CABB592315AFD4F100579674 /* fizzbuzzlib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
