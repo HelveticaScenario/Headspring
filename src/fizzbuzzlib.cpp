@@ -96,5 +96,21 @@ void fizzBuzzStreams(ostream &os,
 	return;
 }
 
+string fizzBuzzString(int value,
+					string three = "Fizz", 
+					string five = "Buzz",
+					string both = "FizzBuzz"){	
+	if (value % 3 == 0){
+		if (value % 5 == 0){
+			return both+"\n";
+		}
+		return three;
+	}
+	if (value % 5 == 0){
+		return five+"\n";
+	}
+	
+}
+
 
 

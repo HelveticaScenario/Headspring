@@ -13,4 +13,5 @@
 using namespace std;
 void fizzBuzzPrintf(signed int, signed int, char*, char*, char*);
 void fizzBuzzStreams(ostream, signed int, signed int, string, string, string);
+string fizzBuzzString(int, string, string, string);
 #endif
