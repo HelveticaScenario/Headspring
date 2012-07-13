@@ -6,15 +6,20 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
+#include <string>
+#include <cstdlib.h>
 #include <dlfcn.h>
 #include "fizzbuzzlib.h"
+using namespace std;
 
 int main(int argc, const char * argv[])
 {
-    printf("Hello, World!\n");
+    cout << "Printf\n";
     fizzBuzzPrintf(1, 100, "a", "b", "c");
+    cout << "Streams\n";
+    ostream cout;
+    fizzBuzzStreams(cout);
     return 0;
 }
 

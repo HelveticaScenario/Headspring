@@ -12,7 +12,9 @@
 //
 #include <cstdio>
 #include <iostream>
-#include <strings.h>
+#include <string>
+#include <fstream>
+#include "fizzbuzzlib.h"
 using namespace std;
 
 /*
@@ -62,7 +64,37 @@ void fizzBuzzPrintf(signed int min = 1,
     
 }
 
-
+void fizzBuzzStreams(ostream &os, 
+					signed int min = 1, 
+					signed int max = 100,
+					string three = "Fizz", 
+					string five = "Buzz",
+					string both = "FizzBuzz"){	
+	//filebuf fb;
+	//extern streambuf *fbs;
+	//ostream os(streambuf fb);
+	for (int i = min; i <= max; ++i)
+	{
+		if (i % 3 == 0)
+		{
+			if (i % 5 == 0)
+			{
+				os << both << endl;
+				continue;
+			}
+				os << three << endl;
+			continue;
+		}
+		if (i % 5 == 0)
+		{
+				os << five << endl;
+			continue;
+		}
+		printf("%d\n", i);
+		continue;
+	}
+	return;
+}
 
 
 

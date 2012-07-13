@@ -8,6 +8,9 @@
 
 #ifndef FizzBuzzLib_fizzbuzzlib_h
 #define FizzBuzzLib_fizzbuzzlib_h
+#include <iostream>
+#include <string>
+using namespace std;
 void fizzBuzzPrintf(signed int, signed int, char*, char*, char*);
-
+void fizzBuzzStreams(ostream, signed int, signed int, string, string, string);
 #endif
