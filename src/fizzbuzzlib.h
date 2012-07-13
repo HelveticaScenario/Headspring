@@ -8,7 +8,6 @@
 
 #ifndef FizzBuzzLib_fizzbuzzlib_h
 #define FizzBuzzLib_fizzbuzzlib_h
-
-
+void fizzBuzzPrintf(signed int, signed int, char*, char*, char*);
 
 #endif
