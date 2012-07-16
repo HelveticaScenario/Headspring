@@ -11,6 +11,7 @@
 //#include <cstdlib.h>
 #include <dlfcn.h>
 #include "fizzbuzzlib.h"
+#include "fizzbuzzlibc.h"
 using namespace std;
 
 int main(int argc, const char * argv[])
@@ -20,10 +21,14 @@ int main(int argc, const char * argv[])
     //cout << "Streams\n";
     //ostream cout;
     //DIDNT WORK fizzBuzzStreams(cout);
-    cout << "Simple\n";
+    /*cout << "Simple\n";
     for (int i = 0; i <= 100; ++i)
     {
     	fizzBuzzString(i, "a", "b", "c");
+    }*/
+    for (int i = 0; i < 100; ++i)
+    {
+        cout << fizzBuzzChar(i) << endl;
     }
     return 0;
 }
