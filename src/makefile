@@ -1,6 +1,6 @@
 main: fizzbuzzlib.dylib
 	export LD_LIBRARY_PATH=.
-	g++ test.c -o test.out -lfizzbuzz -lfizzbuzzc -L.
+	g++ test.cpp -o test.out -lfizzbuzz -lfizzbuzzc -L.
 	./test.out
 
 fizzbuzzlib.dylib:

@@ -10,8 +10,9 @@
 #define FizzBuzzLib_fizzbuzzlib_h
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 void fizzBuzzPrintf(signed int, signed int, char*, char*, char*);
-void fizzBuzzStreams(ostream, signed int, signed int, string, string, string);
+void fizzBuzzStreams(ostream&, signed int, signed int, string, string, string);
 string fizzBuzzString(int, string, string, string);
 #endif

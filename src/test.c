@@ -10,6 +10,7 @@
 #include <string>
 //#include <cstdlib.h>
 #include <dlfcn.h>
+#include <cctype>
 #include "fizzbuzzlib.h"
 #include "fizzbuzzlibc.h"
 using namespace std;
@@ -28,7 +29,8 @@ int main(int argc, const char * argv[])
     }*/
     for (int i = 0; i < 100; ++i)
     {
-        cout << fizzBuzzChar(i) << endl;
+        if (isprint((int)fizzBuzzChar[1:](i)))
+            cout << fizzBuzzChar(i) << endl;
     }
     return 0;
 }

@@ -1,1 +1,1 @@
-char const* fizzBuzzChar(int);
+char* fizzBuzzChar(int);

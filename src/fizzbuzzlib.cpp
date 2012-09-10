@@ -13,27 +13,10 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <fstream>
 #include "fizzbuzzlib.h"
 using namespace std;
-
-/*
-void bubbleSortArray(int arr[], int SIZE)
-{
-	int i, tmp;
-	for (i = 0; i < SIZE; i++)
-	{
-		if((i < SIZE - 1) && (arr[i] > arr[i + 1]))
-		{
-			tmp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = tmp;
-			i = -1;
-		}
-	}		
-}
-*/
-
 
 void fizzBuzzPrintf(signed int min = 1, 
               signed int max = 100, 
@@ -64,7 +47,7 @@ void fizzBuzzPrintf(signed int min = 1,
     
 }
 
-void fizzBuzzStreams(ostream &os, 
+void fizzBuzzStreams(ostream& os,
 					signed int min = 1, 
 					signed int max = 100,
 					string three = "Fizz", 
@@ -85,16 +68,19 @@ void fizzBuzzStreams(ostream &os,
 				os << three << endl;
 			continue;
 		}
-		if (i % 5 == 0)
+		else if (i % 5 == 0)
 		{
 				os << five << endl;
 			continue;
 		}
-		printf("%d\n", i);
-		continue;
+		else{
+			os << i << endl;
+			continue;
+		}
 	}
 	return;
 }
+
 
 string fizzBuzzString(int value,
 					string three = "Fizz", 
@@ -104,12 +90,14 @@ string fizzBuzzString(int value,
 		if (value % 5 == 0){
 			return both+"\n";
 		}
-		return three;
+		return three+"\n";
 	}
-	if (value % 5 == 0){
+	else if (value % 5 == 0){
 		return five+"\n";
 	}
-	
+	ostringstream toString;
+	toString << value << endl;
+	return toString.str();
 }
 
 
