@@ -11,6 +11,10 @@ namespace FirstSteps
     {
         public static string GetSuffix(string url)
         {
+            if (url == "")
+            {
+                return "";
+            }
             url = url.ToUpper();
             if (url.StartsWith("http://".ToUpper()))
             {

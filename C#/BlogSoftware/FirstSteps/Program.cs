@@ -31,32 +31,38 @@ namespace FirstSteps
 //            Console.WriteLine(new DateTime(34, 6, 23).DayOfWeek);
 //            Console.WriteLine(new DateTime(53, 7, 13).DayOfWeek);
 //            Console.WriteLine(new DateTime(26, 6, 27).Year.ToString(CultureInfo.InvariantCulture).Length);
-            PhoBase pho;
-            Post[] posts;
-
-            MakeTestPhoBase.DoThat(out pho, out posts);
-            var controller = new Controller(pho);
-            var archive = new string[4];
-            archive[0] = "98\n" +
-                         "\tJuly\n" +
-                         "\t\tSecond - Friday, July 25\n";
-
-            archive[1] = "53\n" +
-                         "\tJuly\n" +
-                         "\t\tFourth - Sunday, July 13\n";
-
-            archive[2] = "34\n" +
-                         "\tJune\n" +
-                         "\t\tThird - Friday, June 23\n" +
-                         "\tApril\n" +
-                         "\t\tFirst - Sunday, April 23\n";
-            
-            archive[3] = "26\n" +
-                         "\tJune\n" +
-                         "\t\tFifth - Saturday, June 27\n";
-//            var tmp = posts.OrderByDescending(d => d.TimeStamp).ToArray();
-            Console.WriteLine(@controller.Archives()[40]);
-            Console.WriteLine("hats");
+//            PhoBase pho;
+//            Post[] posts;
+//
+//            MakeTestPhoBase.DoThat(out pho, out posts);
+//            var controller = new Controller(pho);
+//            var archive = new string[4];
+//            archive[0] = "98\n" +
+//                         "\tJuly\n" +
+//                         "\t\tSecond - Friday, July 25\n";
+//
+//            archive[1] = "53\n" +
+//                         "\tJuly\n" +
+//                         "\t\tFourth - Sunday, July 13\n";
+//
+//            archive[2] = "34\n" +
+//                         "\tJune\n" +
+//                         "\t\tThird - Friday, June 23\n" +
+//                         "\tApril\n" +
+//                         "\t\tFirst - Sunday, April 23\n";
+//            
+//            archive[3] = "26\n" +
+//                         "\tJune\n" +
+//                         "\t\tFifth - Saturday, June 27\n";
+////            var tmp = posts.OrderByDescending(d => d.TimeStamp).ToArray();
+//            Console.WriteLine(@controller.Archives()[40]);
+//            Console.WriteLine("hats");
+//            Console.WriteLine(Convert.ToInt32("35") );
+            Controller masterControl = new Controller(new PhoBase(), "password");
+            while (true)
+            {
+                masterControl.Access();
+            }
         }
     }
 }

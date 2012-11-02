@@ -10,7 +10,12 @@ namespace FirstSteps
     {
         //Maintains a collection of Post objects.
         //You can start out initializing the array with about 5 fake posts (new Post(...)...)
-        private List<Post> posts; 
+        private List<Post> posts;
+        public bool Empty 
+        { 
+            get { return posts.Count == 0; } 
+        }
+
 
         public PhoBase()
         {
@@ -47,7 +52,12 @@ namespace FirstSteps
 //            }
 //            return null;
             //suggested converting to LINQ?
-            return posts.FirstOrDefault(post => post.Nickname == nickname);
+            var returnPost = posts.FirstOrDefault(post => post.Nickname == nickname);
+            if (returnPost == null)
+            {
+                throw new Exception("No post with that nickname.");
+            }
+            return returnPost;
         }
     }
 }

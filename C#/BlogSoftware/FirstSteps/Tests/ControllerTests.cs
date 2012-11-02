@@ -16,7 +16,7 @@ namespace FirstSteps.Tests
         public ControllerTests()
         {
             MakeTestPhoBase.DoThat(out pho, out posts);
-            controller = new Controller(pho);
+            controller = new Controller(pho, "password");
             archive = new string[4];
             archive[0] = "98\n" +
                          "\tJuly\n" +
