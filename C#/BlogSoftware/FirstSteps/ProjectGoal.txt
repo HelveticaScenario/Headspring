@@ -1,0 +1,45 @@
+﻿C# Book chapters 3 & 4.
+    Chapter 5 if you've got the time.
+
+Long-term Project: Blog Software
+================================
+
+Database will contain all posts.
+
+Urls (the part after the .com):
+
+    /
+        Home.  Show the entire, most recent post.
+
+    /post-nick-name
+        Show the entire post that has this nick name.
+
+    /Archives
+        Show the date and title of all the posts, most recent on top.
+        Group them by year and month, ie:
+
+            2011
+                December
+                    Sample Title - December 10
+                    Sample Title - December 09
+                November
+                    Sample Title - November 26
+
+            2010
+                etc...
+
+    /2010
+        If the url looks like a year, show the date and title of all posts from that year, most recen ton top.
+        In other words, a part of the Archive page.
+
+    /Admin
+        This screen will require a login.  We can assume a single user.
+
+        The admin screen allows the admin to delete any post, or create a new post.
+
+Posts should have a title, url-friendly nickname, body text, and date/time of publication.
+
+What to do about nicknames that look like years, etc?
+    => Recommend for me a set of rules about what makes a good nickname, and how to generate one from a title.
+       It should be valid URL characters, should be based on the title, and should not conflict with things like /2010, /Admin, /Archives...
+
