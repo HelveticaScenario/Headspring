@@ -11,7 +11,7 @@ namespace FirstSteps.Tests
             posts[0] = (new Post("First", "first", "first post", new DateTime(34, 4, 23)));
             posts[1] = (new Post("Second", "second", "second post", new DateTime(98, 7, 25)));
             posts[2] = (new Post("Third", "third", "third post", new DateTime(34, 6, 23)));
-            posts[3] = (new Post("Fourth", "fourth", "fourth post", new DateTime(53, 7, 13)));
+            posts[3] = (new Post("Fourth", "fourth", "fourth post", new DateTime(53, 7, 13), "Some Guy"));
             posts[4] = (new Post("Fifth", "fifth", "fifth post", new DateTime(26, 6, 27)));
             foreach (Post post in posts)
             {

@@ -46,6 +46,16 @@ namespace FirstSteps
             return GetFormattedPostMap(ArchiveArray.Where(post => post.TimeStamp.Year == year));
 
         }
+        
+        public string AllByAuthor(string author)
+        {
+            //Ask the database for all posts,
+            //collect the ones in the given year,
+            //and return *those* in reverse 
+            //chronological order.
+            return GetFormattedPostMap(ArchiveArray.Where(post => post.Author == author));
+
+        }
 
         public string Nickname(string nickname)
         {
@@ -54,7 +64,8 @@ namespace FirstSteps
             //and just return that.
             var post = phoBase.Get(nickname);
             var toReturn = "";
-            toReturn += post.Title + "\n\n";
+            toReturn += post.Title + "\n";
+            toReturn += "by " + post.Author + "\n\n";
             toReturn += post.Body + "\n\n";
             toReturn += FormattedDateString(post.TimeStamp) + "\n";
             return toReturn;

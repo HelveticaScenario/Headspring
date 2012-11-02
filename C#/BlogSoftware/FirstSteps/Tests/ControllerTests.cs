@@ -36,13 +36,15 @@ namespace FirstSteps.Tests
                          "\tJune\n" +
                          "\t\tFifth - Saturday, June 27\n";
 
-            nicknameString = "Fourth\n\n" +
-                         "fourth post\n\n" +
-                         "Sunday, July 13\n";
+            nicknameString = "Fourth\n" +
+                             "by Some Guy\n\n" +
+                             "fourth post\n\n" +
+                             "Sunday, July 13\n";
             
-            indexString = "Second\n\n" +
-                         "second post\n\n" +
-                         "Friday, July 25\n";
+            indexString = "Second\n" +
+                          "by John Doe\n\n" +
+                          "second post\n\n" +
+                          "Friday, July 25\n";
         }
         [Fact]
         public void IndexTest()
@@ -60,6 +62,12 @@ namespace FirstSteps.Tests
         public void ArchiveTest()
         {
             controller.Archives().ShouldEqual(archive[0] + "\n" + archive[1] + "\n" + archive[2] + "\n" + archive[3]);
+        }
+
+        [Fact]
+        public void AllByAuthorTest()
+        {
+            controller.AllByAuthor("John Doe").ShouldEqual(archive[0] + "\n" + archive[2] + "\n" + archive[3]);
         }
 
         [Fact]
