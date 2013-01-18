@@ -1,0 +1,13 @@
+﻿@model MVC4BlogSoftware.PagedEntries
+<ol class="round">
+    @foreach (var post in Model.PageOfPosts)
+    {
+        <li>
+            <h2>@Html.ActionLink(post.Title, "Nickname", new { nickname = post.Nickname })</h2>
+            <h5>@Html.ActionLink(post.Author, "Author", new { name = post.Author , page = 1})</h5>
+            @post.Body<br />
+            @post.TimeStamp
+        </li> 
+    }
+</ol>
+

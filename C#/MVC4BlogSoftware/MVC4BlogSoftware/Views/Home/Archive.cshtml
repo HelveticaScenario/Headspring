@@ -1,0 +1,37 @@
+﻿
+@model MVC4BlogSoftware.PagedEntries
+
+<!-- import the included stylesheet for some (very basic) default styling -->
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@Html.Partial("_ArchivePartial")
+@if(Model.Enabled)
+{
+@*    @Html.PagedListPager(Model.PagedList,page => Url.Action("Archive", new { page }),PagedListRenderOptions.MinimalWithItemCountText)*@
+    if (Model.CurrentPage > 1)
+     {
+        @Html.ActionLink("<<", "Archive", new {page = Model.CurrentPage - 1});
+     }
+    if (Model.CurrentPage < Model.TotalPages)
+    {
+        @Html.ActionLink(">>", "Archive", new { page = Model.CurrentPage + 1 });
+    }
+    @Html.ActionLink("All one page?", "Archive", new {page = 0})    
+    
+}
+else
+{
+    @Html.ActionLink("5 per page?", "Archive", new {page = 1})       
+}
+@*<div class="pagination">*@
+@*    <ul>*@
+@*        <li class="disabled PagedList-skipToPrevious">*@
+@*            <a>«</a>*@
+@*        </li>*@
+@*        <li class="disabled PagedList-pageCountAndLocation">*@
+@*            <a>Showing items 1 through 2 of 5.</a>*@
+@*        </li>*@
+@*        <li class="PagedList-skipToNext">*@
+@*            <a href="/Home/Archive?page=2">»</a>*@
+@*        </li>*@
+@*    </ul>*@
+@*</div>*@@*<a href="/Home/Archive?page=0">All one page?</a>*@
