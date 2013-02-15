@@ -86,6 +86,12 @@ namespace MVC4BlogSoftware.Controllers
             return PagedActionResult(aa, page, perPage, "Author",name);
         }
 
+        public ActionResult AuthorTest()
+        {
+            var authorsRepo = new AuthorRepository().GetAll();
+            return null;
+        }
+
         public ActionResult Year(int year, int page = 1)
         {
             const int perPage = 2;

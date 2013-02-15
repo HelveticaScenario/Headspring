@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace FirstSteps
 {
@@ -13,6 +16,25 @@ namespace FirstSteps
         void Delete(Post post);
         Post[] GetAll();
         Post Get(string nickname);
+    }
+
+    public class Author
+    {
+        public int id { get; set; }
+        public string username { get; set; }
+    }
+
+    public class AuthorRepository
+    {
+        public Author[] GetAll()
+        {
+            using (var connection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=bfgiadbif;"))
+            {
+                connection.Open();
+                var someVar = connection.Query<Author>("select * from authors").ToArray();
+                return someVar;
+            }
+        }
     }
 
     public class PostRepository : IPostRepository
