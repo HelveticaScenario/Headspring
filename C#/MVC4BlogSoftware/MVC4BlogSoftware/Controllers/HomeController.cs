@@ -60,6 +60,7 @@ namespace MVC4BlogSoftware.Controllers
             if (ModelState.IsValid)
             {
                 _postRepository.Add(new Post(
+                                 -1,
                                  model.Title,
                                  model.Body,
                                  DateTime.Now,
@@ -86,10 +87,10 @@ namespace MVC4BlogSoftware.Controllers
             return PagedActionResult(aa, page, perPage, "Author",name);
         }
 
-        public ActionResult AuthorTest()
+        public ActionResult PostTest()
         {
-            var authorsRepo = new AuthorRepository().GetAll();
-            return null;
+            var postRepo = _postRepository.GetAll();
+            return PagedActionResult(postRepo,1,postRepo.Count(),"Archive");
         }
 
         public ActionResult Year(int year, int page = 1)

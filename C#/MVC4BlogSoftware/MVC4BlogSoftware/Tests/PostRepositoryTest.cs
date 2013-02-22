@@ -12,11 +12,11 @@ namespace FirstSteps.Tests
 
         public void FillWithFakeData()
         {
-            posts.Add(new Post("First", "first post", new DateTime(34, 4, 23), "John Doe"));
-            posts.Add(new Post("Second", "second post", new DateTime(98, 7, 25), "John Doe"));
-            posts.Add(new Post("Third", "third post", new DateTime(34, 6, 23), "John Doe"));
-            posts.Add(new Post("Fourth", "fourth post", new DateTime(53, 7, 13), "Some Guy"));
-            posts.Add(new Post("Fifth", "fifth post", new DateTime(26, 6, 27), "John Doe"));
+            posts.Add(new Post(1, "First", "first post", new DateTime(34, 4, 23), "John Doe"));
+            posts.Add(new Post(2, "Second", "second post", new DateTime(98, 7, 25), "John Doe"));
+            posts.Add(new Post(3, "Third", "third post", new DateTime(34, 6, 23), "John Doe"));
+            posts.Add(new Post(4, "Fourth", "fourth post", new DateTime(53, 7, 13), "Some Guy"));
+            posts.Add(new Post(5, "Fifth", "fifth post", new DateTime(26, 6, 27), "John Doe"));
         }
 
         public PostRepositoryTest()

@@ -18,24 +18,25 @@ namespace FirstSteps
         Post Get(string nickname);
     }
 
+
     public class Author
     {
         public int id { get; set; }
         public string username { get; set; }
     }
 
-    public class AuthorRepository
-    {
-        public Author[] GetAll()
-        {
-            using (var connection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=bfgiadbif;"))
-            {
-                connection.Open();
-                var someVar = connection.Query<Author>("select * from authors").ToArray();
-                return someVar;
-            }
-        }
-    }
+//    public class AuthorRepository
+//    {
+//        public Author[] GetAll()
+//        {
+//            using (var connection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=PASSWORD;"))
+//            {
+//                connection.Open();
+//                var someVar = connection.Query<Author>("select * from authors").ToArray();
+//                return someVar;
+//            }
+//        }
+//    }
 
     public class PostRepository : IPostRepository
     {
@@ -46,7 +47,23 @@ namespace FirstSteps
             FakeDb = new StubPostRepository();
             FakeDb.FillWithFakeData();
         }
-        
+
+        public Post[] GetAll()
+        {
+            using (var connection = Connection())
+            {
+                var someVar = connection.Query<Post>("select posts.*, `authors`.username as author from posts inner join authors on posts.authorId = authors.id").ToArray();
+                return someVar;
+            }
+        }
+
+        private static MySqlConnection Connection()
+        {
+            var mySqlConnection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=PASSWORD;");
+            mySqlConnection.Open();
+            return mySqlConnection;
+        }
+
         public void Add(Post post)
         {
             FakeDb.Add(post);
@@ -55,11 +72,6 @@ namespace FirstSteps
         public void Delete(Post post)
         {
             FakeDb.Delete(post);
-        }
-
-        public Post[] GetAll()
-        {
-            return FakeDb.GetAll();
         }
 
         public Post Get(string nickname)
@@ -86,11 +98,11 @@ namespace FirstSteps
 
         public void FillWithFakeData()
         {
-            posts.Add(new Post("First", "first post", new DateTime(34, 4, 23), "John Doe"));
-            posts.Add(new Post("Second", "second post", new DateTime(98, 7, 25), "John Doe"));
-            posts.Add(new Post("Third", "third post", new DateTime(34, 6, 23), "John Doe"));
-            posts.Add(new Post("Fourth", "fourth post", new DateTime(53, 7, 13), "Some Guy"));
-            posts.Add(new Post("Fifth", "fifth post", new DateTime(26, 6, 27), "John Doe"));
+            posts.Add(new Post(1, "First", "first post", new DateTime(34, 4, 23), "John Doe"));
+            posts.Add(new Post(2, "Second", "second post", new DateTime(98, 7, 25), "John Doe"));
+            posts.Add(new Post(3, "Third", "third post", new DateTime(34, 6, 23), "John Doe"));
+            posts.Add(new Post(4, "Fourth", "fourth post", new DateTime(53, 7, 13), "Some Guy"));
+            posts.Add(new Post(5, "Fifth", "fifth post", new DateTime(26, 6, 27), "John Doe"));
         }
 
         public void Add(Post post)

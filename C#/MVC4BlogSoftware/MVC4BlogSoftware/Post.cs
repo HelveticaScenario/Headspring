@@ -4,21 +4,26 @@ namespace FirstSteps
 {
     public class Post
     {
+        public int Id { get; set; }
         public string Body { get; set; }
-        public string Nickname { get
-        {
-            if (Title.Length >= 10)
-                Title.Remove(9);
-            return Title.TrimEnd().ToLower().Replace(" ", "-");
-        }
-        }
+        public string Nickname { get; set; }
         public string Author { get; set; }
         public string Title { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public Post(string title, string body, DateTime timeStamp, string author)
+        public Post()
         {
+        }
+
+        public Post(int id, string title, string body, DateTime timeStamp, string author)
+        {
+            Id = id;
             Title = title;
+            var nickname = Title;
+            if (nickname.Length >= 10) nickname = nickname.Remove(9);
+            Nickname = nickname.TrimEnd().ToLower().Replace(" ", "-");
+
+            Nickname = nickname;
             Body = body;
             Author = author;
             TimeStamp = timeStamp;
