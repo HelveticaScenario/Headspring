@@ -42,25 +42,25 @@ INSERT INTO posts
 VALUES
 ('First', 'first', 'first post', '2000-5-7 12:30:30', '1');
 
--- INSERT INTO posts
--- (title, nickname, body, published_datetime, author)
--- VALUES
--- ();
--- 
--- INSERT INTO posts
--- (title, nickname, body, published_datetime, author)
--- VALUES
--- ();
--- 
--- INSERT INTO posts
--- (title, nickname, body, published_datetime, author)
--- VALUES
--- ();
--- 
--- INSERT INTO posts
--- (title, nickname, body, published_datetime, author)
--- VALUES
--- ();
--- 
+INSERT INTO posts
+(title, nickname, body, published_datetime, authorId)
+VALUES
+('Second', 'second', 'second post', '2001-5-7 12:30:30', '1');
+
+INSERT INTO posts
+(title, nickname, body, published_datetime, authorId)
+VALUES
+('Third', 'third', 'third post', '2002-5-7 12:30:30', '1');
+
+INSERT INTO posts
+(title, nickname, body, published_datetime, authorId)
+VALUES
+('Fourth', 'fourth', 'fourth post', '2003-5-7 12:30:30', '2');
+
+INSERT INTO posts
+(title, nickname, body, published_datetime, authorId)
+VALUES
+('Fifth', 'fifth', 'fifth post', '2004-5-7 12:30:30', '1');
+
 SELECT * FROM `authors`;
 SELECT * FROM posts;

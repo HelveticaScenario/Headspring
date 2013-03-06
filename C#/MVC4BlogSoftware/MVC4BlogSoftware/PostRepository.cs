@@ -59,7 +59,7 @@ namespace FirstSteps
 
         private static MySqlConnection Connection()
         {
-            var mySqlConnection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=PASSWORD;");
+            var mySqlConnection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=password;");
             mySqlConnection.Open();
             return mySqlConnection;
         }
