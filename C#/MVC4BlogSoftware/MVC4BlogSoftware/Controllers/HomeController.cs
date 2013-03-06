@@ -14,7 +14,7 @@ using MVC4BlogSoftware;
 
 namespace MVC4BlogSoftware.Controllers
 {
-    public class PostModel
+    public class PostForm
     {
         [Required]
         [Display(Name = "Title")]
@@ -55,16 +55,16 @@ namespace MVC4BlogSoftware.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(PostModel model, string returnUrl)
+        public ActionResult Add(PostForm form, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 _postRepository.Add(new Post(
                                  -1,
-                                 model.Title,
-                                 model.Body,
+                                 form.Title,
+                                 form.Body,
                                  DateTime.Now,
-                                 model.Author));
+                                 form.Author));
                 return RedirectToAction("Index", "Home");
             }
 

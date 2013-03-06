@@ -194,6 +194,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\Author.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -207,10 +208,9 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="PagedEntries.cs" />
     <Compile Include="PostRepository.cs" />
-    <Compile Include="Post.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\PostRepositoryTest.cs" />
-    <Compile Include="UrlParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />

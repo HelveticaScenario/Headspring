@@ -19,13 +19,7 @@ namespace FirstSteps
     }
 
 
-    public class Author
-    {
-        public int id { get; set; }
-        public string username { get; set; }
-    }
-
-//    public class AuthorRepository
+    //    public class AuthorRepository
 //    {
 //        public Author[] GetAll()
 //        {
