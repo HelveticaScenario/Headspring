@@ -70,7 +70,11 @@ namespace FirstSteps
 
         public Post Get(string nickname)
         {
-            return FakeDb.Get(nickname);
+            using (var connection = Connection())
+            {
+                var someVar = connection.Query<Post>("select posts.*, `authors`.username as author from posts inner join authors on posts.authorId = authors.id where posts.nickname = '" + nickname + "';").ToArray();
+                return someVar[0];
+            }
         }
     }
 

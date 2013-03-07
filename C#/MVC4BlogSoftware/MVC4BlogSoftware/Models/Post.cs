@@ -9,7 +9,7 @@ namespace FirstSteps
         public string Nickname { get; set; }
         public string Author { get; set; }
         public string Title { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime Published_DateTime { get; set; }
 
         public Post()
         {
@@ -26,7 +26,7 @@ namespace FirstSteps
             Nickname = nickname;
             Body = body;
             Author = author;
-            TimeStamp = timeStamp;
+            Published_DateTime = timeStamp;
         }
     }
 }
