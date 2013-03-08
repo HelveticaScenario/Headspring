@@ -128,13 +128,7 @@ namespace MVC4BlogSoftware.Controllers
             //Ask the database for all posts,
             //find the most recent one,
             //return that one.
-            var post = ArchiveArray.FirstOrDefault();
-            if (post != null)
-            {
-                return NicknameGet(post.Nickname);
-            }
-            return null;
-
+            return _postRepository.GetMostRecent();
         }
 
         private IEnumerable<Post> ArchiveArray
@@ -168,12 +162,7 @@ namespace MVC4BlogSoftware.Controllers
             //that has this exact nickname
             //and just return that.
             var post = _postRepository.Get(nickname: nickname);
-//            var toReturn = "";
-//            toReturn += post.Title + "\n";
-//            toReturn += "by " + post.Author + "\n\n";
-//            toReturn += post.Body + "\n\n";
-//            toReturn += FormattedDateString(post.TimeStamp) + "\n";
-            return post;// toReturn;
+            return post;
 
         }
 

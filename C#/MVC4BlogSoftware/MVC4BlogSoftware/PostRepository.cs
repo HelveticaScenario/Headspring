@@ -16,6 +16,7 @@ namespace FirstSteps
         void Delete(Post post);
         Post[] GetAll();
         Post Get(string nickname);
+        Post GetMostRecent();
     }
 
 
@@ -34,21 +35,16 @@ namespace FirstSteps
 
     public class PostRepository : IPostRepository
     {
+        private const string selectClause = "select posts.*, `authors`.username as author " +
+                                            "from posts " +
+                                            "inner join authors on posts.authorId = authors.id ";
+
         public bool Empty { get { return FakeDb.Empty; } }
         private static readonly StubPostRepository FakeDb;
         static PostRepository()
         {
             FakeDb = new StubPostRepository();
             FakeDb.FillWithFakeData();
-        }
-
-        public Post[] GetAll()
-        {
-            using (var connection = Connection())
-            {
-                var someVar = connection.Query<Post>("select posts.*, `authors`.username as author from posts inner join authors on posts.authorId = authors.id").ToArray();
-                return someVar;
-            }
         }
 
         private static MySqlConnection Connection()
@@ -58,6 +54,38 @@ namespace FirstSteps
             return mySqlConnection;
         }
 
+        public Post[] GetAll()
+        {
+            using (var connection = Connection())
+            {
+                var someVar = connection.Query<Post>(selectClause).ToArray();
+                return someVar;
+            }
+        }
+
+        public Post Get(string nickname)
+        {
+            using (var connection = Connection())
+            {
+                var someVar = connection.Query<Post>(selectClause + 
+                                                     "where posts.nickname = @nickname;",
+                                                     new {nickname}).ToArray();
+                return someVar.FirstOrDefault();
+            }
+        }
+
+        public Post GetMostRecent()
+        {
+            using (var connection = Connection())
+            {
+                var someVar = connection.Query<Post>(selectClause +
+                                                     "order by published_datetime desc " +
+                                                     "limit 1;", new {}
+                                                     ).ToArray();
+                return someVar.FirstOrDefault();
+            }
+        }
+        
         public void Add(Post post)
         {
             FakeDb.Add(post);
@@ -66,15 +94,6 @@ namespace FirstSteps
         public void Delete(Post post)
         {
             FakeDb.Delete(post);
-        }
-
-        public Post Get(string nickname)
-        {
-            using (var connection = Connection())
-            {
-                var someVar = connection.Query<Post>("select posts.*, `authors`.username as author from posts inner join authors on posts.authorId = authors.id where posts.nickname = '" + nickname + "';").ToArray();
-                return someVar[0];
-            }
         }
     }
 
@@ -138,6 +157,11 @@ namespace FirstSteps
                 throw new Exception("No post with that nickname.");
             }
             return returnPost;
+        }
+
+        public Post GetMostRecent()
+        {
+            throw new NotImplementedException();
         }
     }
 }
