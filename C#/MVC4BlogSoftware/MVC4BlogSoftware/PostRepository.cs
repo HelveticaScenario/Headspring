@@ -35,11 +35,17 @@ namespace FirstSteps
 
     public class PostRepository : IPostRepository
     {
-        private const string selectClause = "select posts.*, `authors`.username as author " +
-                                            "from posts " +
-                                            "inner join authors on posts.authorId = authors.id ";
+        private const string selectClause = "SELECT posts.*, `authors`.username AS author " +
+                                            "FROM posts " +
+                                            "INNER JOIN authors ON posts.authorId = authors.id ";
 
-        public bool Empty { get { return FakeDb.Empty; } }
+        public bool Empty { get
+        {
+            using (var connection = Connection())
+            {
+                return connection.Query<int>("SELECT COUNT(*) FROM posts").ToArray()[0] == 0;
+            }
+        } }
         private static readonly StubPostRepository FakeDb;
         static PostRepository()
         {
@@ -54,36 +60,31 @@ namespace FirstSteps
             return mySqlConnection;
         }
 
-        public Post[] GetAll()
+        private static Post[] ConnectionQuery(string queryString = "", object referencedParams = null)
         {
             using (var connection = Connection())
             {
-                var someVar = connection.Query<Post>(selectClause).ToArray();
-                return someVar;
+                return connection.Query<Post>(selectClause +
+                                                     queryString,
+                                                     referencedParams).ToArray();
             }
+        }
+
+        public Post[] GetAll()
+        {
+            return ConnectionQuery();
         }
 
         public Post Get(string nickname)
         {
-            using (var connection = Connection())
-            {
-                var someVar = connection.Query<Post>(selectClause + 
-                                                     "where posts.nickname = @nickname;",
-                                                     new {nickname}).ToArray();
-                return someVar.FirstOrDefault();
-            }
+
+            return ConnectionQuery("WHERE posts.nickname = @nickname;", new {nickname}).FirstOrDefault();
         }
 
         public Post GetMostRecent()
         {
-            using (var connection = Connection())
-            {
-                var someVar = connection.Query<Post>(selectClause +
-                                                     "order by published_datetime desc " +
-                                                     "limit 1;", new {}
-                                                     ).ToArray();
-                return someVar.FirstOrDefault();
-            }
+            return ConnectionQuery("ORDER BY published_datetime DESC " +
+                                   "LIMIT 1;").FirstOrDefault();
         }
         
         public void Add(Post post)
