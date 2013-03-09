@@ -7,7 +7,7 @@
     <ol class="round">
         <li>
             <h2>@Model.Title</h2>
-            <h5>@Html.ActionLink(Model.Author, "Author", "Home", new {name = Model.Author})</h5>
+            <h5>@Html.ActionLink(Model.Author, "Author", new {name = Model.Author, page = 1})</h5>
             @Model.Body<br/>
             @Model.Published_DateTime
         </li>
