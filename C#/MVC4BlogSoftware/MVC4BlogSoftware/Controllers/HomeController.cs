@@ -142,7 +142,7 @@ namespace MVC4BlogSoftware.Controllers
             //collect the ones in the given year,
             //and return *those* in reverse 
             //chronological order.
-            return ArchiveArray.Where(post => post.Published_DateTime.Year == year);
+            return _postRepository.GetYear(year);
 
         }
 

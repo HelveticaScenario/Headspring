@@ -17,6 +17,7 @@ namespace FirstSteps
         Post[] GetAll();
         Post Get(string nickname);
         Post GetMostRecent();
+        Post[] GetYear(int year);
     }
 
 
@@ -87,6 +88,12 @@ namespace FirstSteps
                                    "LIMIT 1;").FirstOrDefault();
         }
         
+        public Post[] GetYear(int year)
+        {
+            return ConnectionQuery("WHERE extract(year from posts.published_datetime) =  @year " +
+                                   "ORDER BY published_datetime DESC;" , new { year });
+        }
+
         public void Add(Post post)
         {
             FakeDb.Add(post);
@@ -161,6 +168,11 @@ namespace FirstSteps
         }
 
         public Post GetMostRecent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post[] GetYear(int year)
         {
             throw new NotImplementedException();
         }
