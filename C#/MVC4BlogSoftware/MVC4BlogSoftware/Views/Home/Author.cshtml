@@ -9,9 +9,17 @@
      {
         @Html.ActionLink("<<", "Author", new {name = Model.Author, page = Model.CurrentPage - 1});
      }
-    if (Model.CurrentPage < Model.TotalPages)
+    else
+    {
+        <span>&lt;&lt;</span>
+    }
+    if (Model.PageOfPosts.Any())
     {
         @Html.ActionLink(">>", "Author", new {name = Model.Author,  page = Model.CurrentPage + 1 });
+    }
+    else
+    {
+        <span>&gt;&gt;</span>
     }
     @Html.ActionLink("All one page?", "Author", new {name = Model.Author, page = 0})    
     

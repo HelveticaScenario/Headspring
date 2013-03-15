@@ -31,6 +31,7 @@ namespace MVC4BlogSoftware.Controllers
 
     public class HomeController : Controller
     {
+        private const int PerPage = 2;
         private readonly IPostRepository _postRepository;
 
         //
@@ -45,7 +46,7 @@ namespace MVC4BlogSoftware.Controllers
 
         public ActionResult Index()
         {
-            return View(IndexGet());
+            return View(_postRepository.GetMostRecent());
         }
 
         public ActionResult Add(string returnUrl)
@@ -75,95 +76,37 @@ namespace MVC4BlogSoftware.Controllers
 
         public ActionResult Archive(int page = 1)
         {
-            const int perPage = 2;
-            IEnumerable<Post> aa = ArchiveArray;
-            return PagedActionResult(aa, page, perPage, "Archive");
+            return PagedActionResult(_postRepository.GetAll(page, PerPage), page, "Archive");
         }
 
         public ActionResult Author(string name, int page = 1)
         {
-            const int perPage = 2;
-            IEnumerable<Post> aa = AllByAuthor(name);
-            return PagedActionResult(aa, page, perPage, "Author",name);
-        }
-
-        public ActionResult PostTest()
-        {
-            var postRepo = _postRepository.GetAll();
-            return PagedActionResult(postRepo,1,postRepo.Count(),"Archive");
+            return PagedActionResult(_postRepository.GetAuthor(name, page, PerPage), page, "Author",name);
         }
 
         public ActionResult Year(int year, int page = 1)
         {
-            const int perPage = 2;
-            IEnumerable<Post> aa = YearGet(year);
-            return PagedActionResult(aa, page, perPage, "Year",null,year);
+            return PagedActionResult(_postRepository.GetYear(year, page, PerPage), page, "Year",null,year);
         }
 
-        private ActionResult PagedActionResult(IEnumerable<Post> aa, int page, int perPage, string view, string name = null, int? year = null )
+        private ActionResult PagedActionResult(IEnumerable<Post> PostCollection, int page, string view, string name = null, int? year = null )
         {
             if (page == 0)
             {
-                return View(view,new PagedEntries(aa, 1, 1, false,name,year));
+                return View(view,new PagedEntries(PostCollection, 1, false,name,year));
             }
-            var totalPages = aa.Count()/perPage;
-            if (aa.Count()%perPage != 0)
-            {
-                totalPages++;
-            }
-            aa = aa.Skip(perPage*(page - 1));
-            aa = aa.Take(perPage);
-            return View(view,new PagedEntries(aa, page, totalPages, true,name,year));
+            return View(view,new PagedEntries(PostCollection, page, true,name,year));
         }
 
         public ActionResult Nickname(string nickname)
-        {
-            var model = NicknameGet(nickname);
-            
-            return View("Index", model);
-        }
-
-        private Post IndexGet()
-        {
-            //Ask the database for all posts,
-            //find the most recent one,
-            //return that one.
-            return _postRepository.GetMostRecent();
-        }
-
-        private IEnumerable<Post> ArchiveArray
-        {
-            get { return _postRepository.GetAll().OrderByDescending(d => d.Published_DateTime); }
-        }
-
-        public IEnumerable<Post> YearGet(int year)
-        {
-            //Ask the database for all posts,
-            //collect the ones in the given year,
-            //and return *those* in reverse 
-            //chronological order.
-            return _postRepository.GetYear(year);
-
-        }
-
-        public IEnumerable<Post> AllByAuthor(string author)
-        {
-            //Ask the database for all posts,
-            //collect the ones in the given year,
-            //and return *those* in reverse 
-            //chronological order.
-            return _postRepository.GetAuthor(author);
-
-        }
-
-        public Post NicknameGet(string nickname)
         {
             //Ask the database for the post
             //that has this exact nickname
             //and just return that.
             var post = _postRepository.Get(nickname: nickname);
-            return post;
-
+            var model = post;
+            
+            return View("Index", model);
         }
 
         public static string MonthName(DateTime date)

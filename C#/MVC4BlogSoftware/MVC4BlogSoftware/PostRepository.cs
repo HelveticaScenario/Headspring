@@ -14,11 +14,11 @@ namespace FirstSteps
         bool Empty { get; }
         void Add(Post post);
         void Delete(Post post);
-        Post[] GetAll();
+        Post[] GetAll(int page, int perPage);
         Post Get(string nickname);
         Post GetMostRecent();
-        Post[] GetYear(int year);
-        Post[] GetAuthor(string author);
+        Post[] GetYear(int year, int page, int perPage);
+        Post[] GetAuthor(string author, int page, int perPage);
     }
 
 
@@ -40,6 +40,10 @@ namespace FirstSteps
         private const string selectClause = "SELECT posts.*, `authors`.username AS author " +
                                             "FROM posts " +
                                             "INNER JOIN authors ON posts.authorId = authors.id ";
+
+        private const string orderByPublishedDatetimeDesc = "ORDER BY published_datetime DESC ";
+
+        private const string pageClause = "LIMIT @offset, @perPage ";
 
         public bool Empty { get
         {
@@ -72,9 +76,11 @@ namespace FirstSteps
             }
         }
 
-        public Post[] GetAll()
+        public Post[] GetAll(int page, int perPage)
         {
-            return ConnectionQuery();
+            var offset = page == 0 ? page : --page * perPage;
+            return ConnectionQuery(orderByPublishedDatetimeDesc + pageClause, 
+                                   new {offset, perPage});
         }
 
         public Post Get(string nickname)
@@ -85,20 +91,24 @@ namespace FirstSteps
 
         public Post GetMostRecent()
         {
-            return ConnectionQuery("ORDER BY published_datetime DESC " +
+            return ConnectionQuery(orderByPublishedDatetimeDesc +
                                    "LIMIT 1;").FirstOrDefault();
         }
-        
-        public Post[] GetYear(int year)
+
+        public Post[] GetYear(int year, int page, int perPage)
         {
+            var offset = page == 0 ? page : --page * perPage;
             return ConnectionQuery("WHERE extract(year from posts.published_datetime) =  @year " +
-                                   "ORDER BY published_datetime DESC;" , new { year });
+                                   orderByPublishedDatetimeDesc + pageClause, 
+                                   new { year, offset, perPage });
         }
 
-        public Post[] GetAuthor(string author)
+        public Post[] GetAuthor(string author, int page, int perPage)
         {
+            var offset = page == 0 ? page : --page * perPage;
             return ConnectionQuery("WHERE authors.username = @author " +
-                                   "ORDER BY published_datetime DESC;", new {author});
+                                   orderByPublishedDatetimeDesc + pageClause, 
+                                   new {author, offset, perPage});
         }
 
         public void Add(Post post)
@@ -145,6 +155,12 @@ namespace FirstSteps
         {
             posts.Remove(post);
         }
+
+        public Post[] GetAll(int page, int perPage)
+        {
+            throw new NotImplementedException();
+        }
+
         public Post[] GetAll()
         {
             var collection = new Post[posts.Count()];
@@ -179,12 +195,17 @@ namespace FirstSteps
             throw new NotImplementedException();
         }
 
+        public Post[] GetYear(int year, int page, int perPage)
+        {
+            throw new NotImplementedException();
+        }
+
         public Post[] GetYear(int year)
         {
             throw new NotImplementedException();
         }
 
-        public Post[] GetAuthor(string author)
+        public Post[] GetAuthor(string author, int page, int perPage)
         {
             throw new NotImplementedException();
         }
