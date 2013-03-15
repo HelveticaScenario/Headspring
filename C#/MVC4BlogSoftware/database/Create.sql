@@ -45,12 +45,12 @@ VALUES
 INSERT INTO posts
 (title, nickname, body, published_datetime, authorId)
 VALUES
-('Second', 'second', 'second post', '2001-5-7 12:30:30', '1');
+('Second', 'second', 'second post', '2001-6-7 12:30:30', '1');
 
 INSERT INTO posts
 (title, nickname, body, published_datetime, authorId)
 VALUES
-('Third', 'third', 'third post', '2001-5-7 12:30:30', '1');
+('Third', 'third', 'third post', '2001-4-7 12:30:30', '1');
 
 INSERT INTO posts
 (title, nickname, body, published_datetime, authorId)

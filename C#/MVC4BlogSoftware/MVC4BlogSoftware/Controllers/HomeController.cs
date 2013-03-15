@@ -152,7 +152,7 @@ namespace MVC4BlogSoftware.Controllers
             //collect the ones in the given year,
             //and return *those* in reverse 
             //chronological order.
-            return ArchiveArray.Where(post => post.Author == author);
+            return _postRepository.GetAuthor(author);
 
         }
 

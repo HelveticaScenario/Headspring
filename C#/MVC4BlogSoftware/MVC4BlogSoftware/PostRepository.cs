@@ -18,6 +18,7 @@ namespace FirstSteps
         Post Get(string nickname);
         Post GetMostRecent();
         Post[] GetYear(int year);
+        Post[] GetAuthor(string author);
     }
 
 
@@ -92,6 +93,12 @@ namespace FirstSteps
         {
             return ConnectionQuery("WHERE extract(year from posts.published_datetime) =  @year " +
                                    "ORDER BY published_datetime DESC;" , new { year });
+        }
+
+        public Post[] GetAuthor(string author)
+        {
+            return ConnectionQuery("WHERE authors.username = @author " +
+                                   "ORDER BY published_datetime DESC;", new {author});
         }
 
         public void Add(Post post)
@@ -173,6 +180,11 @@ namespace FirstSteps
         }
 
         public Post[] GetYear(int year)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Post[] GetAuthor(string author)
         {
             throw new NotImplementedException();
         }
