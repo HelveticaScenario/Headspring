@@ -3,7 +3,7 @@
 <!-- import the included stylesheet for some (very basic) default styling -->
 <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @Html.Partial("_ArchivePartial")
-@if(Model.Enabled)
+@if(Model.PagingEnabled)
 {
     if (Model.CurrentPage > 1)
      {

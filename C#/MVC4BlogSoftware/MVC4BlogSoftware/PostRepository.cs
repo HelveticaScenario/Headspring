@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace FirstSteps
 
     public class PostRepository : IPostRepository
     {
-        private const string selectClause = "SELECT posts.*, `authors`.username AS author " +
+        private const string selectClause = "SELECT posts.*, authors.username AS author " +
                                             "FROM posts " +
                                             "INNER JOIN authors ON posts.authorId = authors.id ";
 
@@ -59,9 +60,9 @@ namespace FirstSteps
             FakeDb.FillWithFakeData();
         }
 
-        private static MySqlConnection Connection()
+        private static SqlConnection Connection()
         {
-            var mySqlConnection = new MySqlConnection("Server=localhost;Database=blog;Uid=root;Pwd=password;");
+            var mySqlConnection = new SqlConnection("Server=.\\sqlExpress;Database=blog;Trusted_Connection=true;");
             mySqlConnection.Open();
             return mySqlConnection;
         }
@@ -78,9 +79,28 @@ namespace FirstSteps
 
         public Post[] GetAll(int page, int perPage)
         {
-            var offset = page == 0 ? page : --page * perPage;
-            return ConnectionQuery(orderByPublishedDatetimeDesc + pageClause, 
-                                   new {offset, perPage});
+            if(page == 0)
+            {
+                using (var connection = Connection())
+                {
+                    return connection.Query<Post>(
+                                                  "SELECT posts.*, authors.username AS author " +
+                                                  "FROM posts " +
+                                                  "INNER JOIN authors ON posts.authorId = authors.id " +
+                                                  orderByPublishedDatetimeDesc).ToArray();
+                }
+            }
+            var offset = --page*perPage;
+            using (var connection = Connection())
+            {
+                return connection.Query<Post>("SELECT * " +
+                                              "FROM ( " +
+                                              "SELECT posts.*, authors.username AS author, ROW_NUMBER() OVER ( " + orderByPublishedDatetimeDesc + ") AS rowNum " +
+                                              "FROM posts " +
+                                              "INNER JOIN authors ON posts.authorId = authors.id " +
+                                              ") AS innerQuery " +
+                                              "WHERE innerQuery.rowNum > @offset AND innerQuery.rowNum <= @offset + @perPage ", new {offset, perPage}).ToArray();
+            }
         }
 
         public Post Get(string nickname)

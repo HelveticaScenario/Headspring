@@ -113,47 +113,5 @@ namespace MVC4BlogSoftware.Controllers
         {
             return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(date.Month);
         }
-
-        private string FormattedDateString(DateTime date)
-        {
-            string toReturn = "";
-            toReturn += date.DayOfWeek + ", ";
-            toReturn += MonthName(date);
-            toReturn += " " + date.Day.ToString();
-            return toReturn;
-        }
-
-        private string GetFormattedPostMap(IEnumerable<Post> posts)
-        {
-            string toReturn = "";
-            int currentYear = -1;
-            int currentMonth = -1;
-            foreach (Post post in posts)
-            {
-                if (post.Published_DateTime.Year != currentYear)
-                {
-                    currentYear = post.Published_DateTime.Year;
-                    toReturn += "\n" + post.Published_DateTime.Year + "\n";
-                    currentMonth = -1;
-                }
-                if (post.Published_DateTime.Month != currentMonth)
-                {
-                    currentMonth = post.Published_DateTime.Month;
-                    toReturn += "\t" + MonthName(post.Published_DateTime) + "\n";
-                }
-                toReturn += "\t\t";
-                toReturn += post.Title;
-                toReturn += " - ";
-                toReturn += FormattedDateString(post.Published_DateTime) + "\n";
-            }
-            return toReturn == "" ? "No Posts!" : toReturn.Remove(0, 1);
-        }
     }
-
-    public class Person
-    {
-        public string Name { get; set; }
-        public int Age { get; set; }
-    }
-
 }
